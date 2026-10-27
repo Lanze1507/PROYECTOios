@@ -1,0 +1,29 @@
+test_interactivo_fracciones_decimales_y_reintentos (test_simplex.PruebasConsolaSimplex.test_interactivo_fracciones_decimales_y_reintentos) ... ok
+test_limite_cli_devuelve_error_sin_anunciar_optimo (test_simplex.PruebasConsolaSimplex.test_limite_cli_devuelve_error_sin_anunciar_optimo) ... ok
+test_reporte_guarda_modelos_tablas_y_validacion (test_simplex.PruebasConsolaSimplex.test_reporte_guarda_modelos_tablas_y_validacion) ... ok
+test_cociente_cero_es_valido (test_simplex.PruebasSimplex.test_cociente_cero_es_valido) ... ok
+test_columna_pivote_con_ceros_y_negativos (test_simplex.PruebasSimplex.test_columna_pivote_con_ceros_y_negativos) ... ok
+test_comparacion_con_enumeracion_independiente (test_simplex.PruebasSimplex.test_comparacion_con_enumeracion_independiente) ... ok
+test_datos_de_entrada_no_se_modifican (test_simplex.PruebasSimplex.test_datos_de_entrada_no_se_modifican) ... ok
+test_detecta_ciclo_de_beale_con_regla_de_dantzig (test_simplex.PruebasSimplex.test_detecta_ciclo_de_beale_con_regla_de_dantzig) ... ok
+test_dimensiones_invalidas (test_simplex.PruebasSimplex.test_dimensiones_invalidas) ... ok
+test_ejemplo_1 (test_simplex.PruebasSimplex.test_ejemplo_1) ... ok
+test_ejemplo_2 (test_simplex.PruebasSimplex.test_ejemplo_2) ... ok
+test_empate_en_cociente_minimo (test_simplex.PruebasSimplex.test_empate_en_cociente_minimo) ... ok
+test_limite_de_iteraciones (test_simplex.PruebasSimplex.test_limite_de_iteraciones) ... ok
+test_no_acotado_desde_tabla_inicial (test_simplex.PruebasSimplex.test_no_acotado_desde_tabla_inicial) ... ok
+test_no_acotado_tras_pivotear (test_simplex.PruebasSimplex.test_no_acotado_tras_pivotear) ... ok
+test_objetivo_cero (test_simplex.PruebasSimplex.test_objetivo_cero) ... ok
+test_optimo_en_tabla_inicial (test_simplex.PruebasSimplex.test_optimo_en_tabla_inicial) ... ok
+test_rechaza_datos_no_numericos (test_simplex.PruebasSimplex.test_rechaza_datos_no_numericos) ... ok
+test_rechaza_lado_derecho_negativo (test_simplex.PruebasSimplex.test_rechaza_lado_derecho_negativo) ... ok
+test_rechaza_max_iteraciones_invalido (test_simplex.PruebasSimplex.test_rechaza_max_iteraciones_invalido) ... ok
+test_rechaza_nan_e_infinito (test_simplex.PruebasSimplex.test_rechaza_nan_e_infinito) ... ok
+test_resolver_dos_veces_no_cambia_resultado (test_simplex.PruebasSimplex.test_resolver_dos_veces_no_cambia_resultado) ... ok
+test_restriccion_redundante_nula (test_simplex.PruebasSimplex.test_restriccion_redundante_nula) ... ok
+test_tres_variables (test_simplex.PruebasSimplex.test_tres_variables) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 1.858s
+
+OK

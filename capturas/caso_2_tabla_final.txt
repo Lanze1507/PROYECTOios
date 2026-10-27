@@ -1,0 +1,18 @@
+CASO 2: Maximizar Z = 5X1 + 4X2
+Fuente: C:\Users\joseb\Downloads\simplex.py
+Llamada ejecutada: resolver_caso(**CASOS_PRUEBA[1])
+
+TABLA FINAL
+Base  X1  X2     S1   S2   b
+  X1   1   0   0.25 -0.5   3
+  X2   0   1 -0.125 0.75 1.5
+   Z   0   0   0.75  0.5  21
+Criterio de parada: fila Z sin valores < -1e-09.
+
+SOLUCION OPTIMA
+  Z = 21
+  X1 = 3
+  X2 = 1.5
+Iteraciones realizadas: 2
+
+RESULTADO: VALIDACION CORRECTA

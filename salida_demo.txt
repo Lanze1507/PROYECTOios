@@ -1,0 +1,196 @@
+PROTOTIPO 1.0 - METODO SIMPLEX TABULAR
+Curso: Investigacion de Operaciones
+Entorno: Python 3.12.14, NumPy 2.3.5, Pandas 3.0.1
+Incluye: maximizacion, <=, b >= 0, x >= 0, holguras y tablas por iteracion.
+Excluye: minimizacion, >=, =, variables libres, artificiales, Gran M, Dos Fases e interfaz grafica.
+Estructuras: matriz NumPy, listas de nombres y DataFrame para impresion.
+Flujo: validar -> forma estandar -> tabla inicial -> optimalidad ->
+       columna pivote -> cociente minimo -> Gauss-Jordan -> repetir.
+Precision: aritmetica flotante; tolerancia de pivoteo 1e-09.
+Empates exactos: primera columna/fila. Ciclos y limite detienen el calculo.
+No sustituye un solucionador numerico para modelos mal escalados.
+Informe: simplex_proyecto.md. Ejemplos de clase: pendientes de confirmar.
+
+ENTRADA: coeficientes definidos en CASOS_PRUEBA dentro del codigo.
+
+============================================================================
+CASO 1: Maximizar Z = 3X1 + 5X2
+============================================================================
+
+MODELO MATEMATICO
+Maximizar Z = 3*X1 + 5*X2
+  R1: 1*X1 <= 4
+  R2: 2*X2 <= 12
+  R3: 3*X1 + 2*X2 <= 18
+  X1, X2 >= 0
+
+FORMA ESTANDAR
+  R1: 1*X1 + S1 = 4
+  R2: 2*X2 + S2 = 12
+  R3: 3*X1 + 2*X2 + S3 = 18
+  Z - (3*X1 + 5*X2) = 0
+  Todas las variables de decision y de holgura son >= 0.
+
+TABLA INICIAL (iteracion 0)
+Base  X1  X2  S1  S2  S3  b
+  S1   1   0   1   0   0  4
+  S2   0   2   0   1   0 12
+  S3   3   2   0   0   1 18
+   Z  -3  -5   0   0   0  0
+
+--- Iteracion 1 ---
+Entra X2: coeficiente -5 en la fila Z.
+Prueba del cociente minimo (solo denominadores positivos):
+  F1 (S1): no elegible; coeficiente <= tolerancia.
+  F2 (S2): 12 / 2 = 6
+  F3 (S3): 18 / 2 = 9
+Sale S2; fila pivote F2.
+Elemento pivote: 2
+Operaciones de Gauss-Jordan:
+  F2 <- F2 / (2)
+  F1 <- F1 - (0) * F2 normalizada
+  F3 <- F3 - (2) * F2 normalizada
+  Z <- Z - (-5) * F2 normalizada
+Base  X1  X2  S1  S2  S3  b
+  S1   1   0   1   0   0  4
+  X2   0   1   0 0.5   0  6
+  S3   3   0   0  -1   1  6
+   Z  -3   0   0 2.5   0 30
+
+--- Iteracion 2 ---
+Entra X1: coeficiente -3 en la fila Z.
+Prueba del cociente minimo (solo denominadores positivos):
+  F1 (S1): 4 / 1 = 4
+  F2 (X2): no elegible; coeficiente <= tolerancia.
+  F3 (S3): 6 / 3 = 2
+Sale S3; fila pivote F3.
+Elemento pivote: 3
+Operaciones de Gauss-Jordan:
+  F3 <- F3 / (3)
+  F1 <- F1 - (1) * F3 normalizada
+  F2 <- F2 - (0) * F3 normalizada
+  Z <- Z - (-3) * F3 normalizada
+Base  X1  X2  S1          S2          S3  b
+  S1   0   0   1  0.33333333 -0.33333333  2
+  X2   0   1   0         0.5           0  6
+  X1   1   0   0 -0.33333333  0.33333333  2
+   Z   0   0   0         1.5           1 36
+
+TABLA FINAL
+Base  X1  X2  S1          S2          S3  b
+  S1   0   0   1  0.33333333 -0.33333333  2
+  X2   0   1   0         0.5           0  6
+  X1   1   0   0 -0.33333333  0.33333333  2
+   Z   0   0   0         1.5           1 36
+Criterio de parada: fila Z sin valores < -1e-09.
+
+SOLUCION OPTIMA
+  Z = 36
+  X1 = 2
+  X2 = 6
+Iteraciones realizadas: 2
+
+INTERPRETACION
+El valor maximo de la funcion objetivo es 36.
+  R1: holgura S1 = 2 (con holgura).
+  R2: holgura S2 = 0 (activa).
+  R3: holgura S3 = 0 (activa).
+
+VALIDACION
+  Variables no negativas: OK
+  Restricciones satisfechas: OK
+  Z coincide con c*x: OK
+  Comparacion con los valores teoricos de referencia:
+    Z: calculado=36, esperado=36 -> OK
+    X1: calculado=2, esperado=2 -> OK
+    X2: calculado=6, esperado=6 -> OK
+  Cota superior por suma ponderada de restricciones: 36 -> OK
+  Pesos: 0, 1.5, 1
+RESULTADO: VALIDACION CORRECTA
+
+============================================================================
+CASO 2: Maximizar Z = 5X1 + 4X2
+============================================================================
+
+MODELO MATEMATICO
+Maximizar Z = 5*X1 + 4*X2
+  R1: 6*X1 + 4*X2 <= 24
+  R2: 1*X1 + 2*X2 <= 6
+  X1, X2 >= 0
+
+FORMA ESTANDAR
+  R1: 6*X1 + 4*X2 + S1 = 24
+  R2: 1*X1 + 2*X2 + S2 = 6
+  Z - (5*X1 + 4*X2) = 0
+  Todas las variables de decision y de holgura son >= 0.
+
+TABLA INICIAL (iteracion 0)
+Base  X1  X2  S1  S2  b
+  S1   6   4   1   0 24
+  S2   1   2   0   1  6
+   Z  -5  -4   0   0  0
+
+--- Iteracion 1 ---
+Entra X1: coeficiente -5 en la fila Z.
+Prueba del cociente minimo (solo denominadores positivos):
+  F1 (S1): 24 / 6 = 4
+  F2 (S2): 6 / 1 = 6
+Sale S1; fila pivote F1.
+Elemento pivote: 6
+Operaciones de Gauss-Jordan:
+  F1 <- F1 / (6)
+  F2 <- F2 - (1) * F1 normalizada
+  Z <- Z - (-5) * F1 normalizada
+Base  X1          X2          S1  S2  b
+  X1   1  0.66666667  0.16666667   0  4
+  S2   0   1.3333333 -0.16666667   1  2
+   Z   0 -0.66666667  0.83333333   0 20
+
+--- Iteracion 2 ---
+Entra X2: coeficiente -0.66666667 en la fila Z.
+Prueba del cociente minimo (solo denominadores positivos):
+  F1 (X1): 4 / 0.66666667 = 6
+  F2 (S2): 2 / 1.3333333 = 1.5
+Sale S2; fila pivote F2.
+Elemento pivote: 1.3333333
+Operaciones de Gauss-Jordan:
+  F2 <- F2 / (1.3333333)
+  F1 <- F1 - (0.66666667) * F2 normalizada
+  Z <- Z - (-0.66666667) * F2 normalizada
+Base  X1  X2     S1   S2   b
+  X1   1   0   0.25 -0.5   3
+  X2   0   1 -0.125 0.75 1.5
+   Z   0   0   0.75  0.5  21
+
+TABLA FINAL
+Base  X1  X2     S1   S2   b
+  X1   1   0   0.25 -0.5   3
+  X2   0   1 -0.125 0.75 1.5
+   Z   0   0   0.75  0.5  21
+Criterio de parada: fila Z sin valores < -1e-09.
+
+SOLUCION OPTIMA
+  Z = 21
+  X1 = 3
+  X2 = 1.5
+Iteraciones realizadas: 2
+
+INTERPRETACION
+El valor maximo de la funcion objetivo es 21.
+  R1: holgura S1 = 0 (activa).
+  R2: holgura S2 = 0 (activa).
+
+VALIDACION
+  Variables no negativas: OK
+  Restricciones satisfechas: OK
+  Z coincide con c*x: OK
+  Comparacion con los valores teoricos de referencia:
+    Z: calculado=21, esperado=21 -> OK
+    X1: calculado=3, esperado=3 -> OK
+    X2: calculado=1.5, esperado=1.5 -> OK
+  Cota superior por suma ponderada de restricciones: 21 -> OK
+  Pesos: 0.75, 0.5
+RESULTADO: VALIDACION CORRECTA
+
+RESUMEN: 2 de 2 ejemplos validados con su solucion teorica.
+Confirmar con el equipo si son los ejercicios resueltos en clase.
